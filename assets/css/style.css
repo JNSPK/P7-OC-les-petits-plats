@@ -102,6 +102,9 @@ header a {
 	flex-direction: column;
 	font-family: Manrope;
 	overflow: hidden;
+	-webkit-box-shadow: 7px 9px 8px -2px #000000;
+	-webkit-box-shadow: 10px 10px 8px -2px #000000;
+	box-shadow: 10px 10px 8px -4px #2b2a2ab4;
 }
 
 .img-wrapper {
@@ -119,32 +122,55 @@ header a {
 .informations {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-evenly;
 	height: 65%;
 	padding: 1rem;
-}
-.ingredients {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 }
 
 .card-title {
 	font-family: Anton;
 	font-size: 18px;
 	font-weight: 400;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
-.sous-titre {
+.subtitle {
+	width: 100%;
 	font-weight: 400;
 	font-size: 10px;
 	text-transform: uppercase;
 	color: lightgray;
 }
 .recette {
-	height: 33%;
+	display: flex;
+	flex-direction: column;
+	height: 30%;
+	gap: 1rem;
 	font-weight: 400;
-	font-size: 14px;
-	text-overflow: ellipsis;
+	font-size: 10px;
+}
+.necessaire {
+	display: flex;
+	flex-direction: column;
+	height: 33%;
+	gap: 1rem;
+}
+.ingredients {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+	align-items: self-start;
+	gap: 1rem;
+}
+
+.description {
+	overflow: hidden;
+}
+
+.ingredient-container {
+	display: flex;
+	flex-direction: column;
 }
 .ingredient {
 	font-size: 10px;
