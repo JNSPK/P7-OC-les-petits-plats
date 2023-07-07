@@ -84,6 +84,43 @@ header a {
 	background-image: url(../images/LogoLoupeHover.jpg);
 }
 
+.dropdowns {
+	display: flex;
+	gap: 2rem;
+	padding-left: 6rem;
+	padding-top: 2rem;
+}
+.dropdowns a {
+	padding-left: 1rem;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	color: black;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+.dropdowns a:visited {
+	color: black;
+}
+.dropdowns ul {
+	list-style-type: none;
+}
+.dropdowns li {
+	background-color: #ffff;
+	list-style-type: none;
+}
+
+.ingredients-list,
+.appareils-list,
+.ustensils-list {
+	font-family: Manrope;
+	font-size: 14px;
+	border-radius: 5px;
+	width: 12rem;
+	height: 3rem;
+}
+
 .recipes-wrapper {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -94,23 +131,32 @@ header a {
 }
 
 .card {
+	position: relative;
 	background-color: #ffff;
 	width: 100%;
 	height: 40rem;
-	border-radius: 10px;
+	border-radius: 5px;
 	display: flex;
 	flex-direction: column;
 	font-family: Manrope;
 	overflow: hidden;
-	-webkit-box-shadow: 7px 9px 8px -2px #000000;
-	-webkit-box-shadow: 10px 10px 8px -2px #000000;
-	box-shadow: 10px 10px 8px -4px #2b2a2ab4;
+	transition: all 0.2s ease;
+}
+.card:hover {
+	cursor: pointer;
+	-webkit-box-shadow: 0px 0px 3px 2px #676767;
+	box-shadow: 0px 0px 3px 2px #676767;
 }
 
 .img-wrapper {
 	height: 35%;
 	overflow: hidden;
-	border-radius: 10px 10px 0 0;
+	border-radius: 5px 5px 0 0;
+	transition: all 0.2s ease;
+}
+.card:hover .informations {
+	/* border-bottom: #676767 solid 1px; */
+	background-size: 100% 100%;
 }
 
 .recipe-img {
@@ -125,6 +171,29 @@ header a {
 	justify-content: space-evenly;
 	height: 65%;
 	padding: 1rem;
+	background: linear-gradient(
+			to bottom,
+			#676767 0%,
+			#676767 0.1%,
+			transparent 2px
+		)
+		no-repeat;
+	background-size: 0 100%;
+	transition: background-size 0.3s ease;
+}
+.time {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Manrope;
+	width: 4rem;
+	height: 2rem;
+	font-size: 11px;
+	border-radius: 20px;
+	background-color: #ffd15b;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
 }
 
 .card-title {
@@ -148,7 +217,7 @@ header a {
 	height: 30%;
 	gap: 1rem;
 	font-weight: 400;
-	font-size: 10px;
+	font-size: 12px;
 }
 .necessaire {
 	display: flex;
@@ -173,7 +242,7 @@ header a {
 	flex-direction: column;
 }
 .ingredient {
-	font-size: 10px;
+	font-size: 11px;
 }
 .quantity {
 	font-size: 10px;

@@ -8,6 +8,7 @@ export default class RecipeCardBuilder {
                 alt="Illustration de la recette">
             </section>
                 <section class="informations">
+                <section class="time">${recipe.time} min</section>
                     <h1 class="card-title">${recipe.name}</h1>
                     <section class="recette">
                         <h2 class="subtitle">Recette</h2>
