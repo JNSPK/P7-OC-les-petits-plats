@@ -90,7 +90,7 @@ header a {
 	padding-left: 6rem;
 	padding-top: 2rem;
 }
-.dropdowns a {
+.dropdowns button {
 	padding-left: 1rem;
 	text-decoration: none;
 	width: 100%;
@@ -100,25 +100,93 @@ header a {
 	justify-content: left;
 	align-items: center;
 }
-.dropdowns a:visited {
-	color: black;
-}
 .dropdowns ul {
 	list-style-type: none;
+	padding: 1rem 0;
 }
 .dropdowns li {
 	background-color: #ffff;
 	list-style-type: none;
 }
 
-.ingredients-list,
-.appareils-list,
-.ustensils-list {
+.ingredients-menu,
+.appliances-menu,
+.ustensils-menu {
 	font-family: Manrope;
 	font-size: 14px;
 	border-radius: 5px;
 	width: 12rem;
 	height: 3rem;
+}
+
+.ingredients-menu button,
+.appliances-menu button,
+.ustensils-menu button {
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	margin-bottom: 0.5rem;
+}
+
+.ingredients-list,
+.appliances-list,
+.ustensils-list {
+	border-radius: 4px;
+}
+.ingredients-list {
+	background-color: #ffd15b;
+}
+
+.ingredients-list.active {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.ingredients-list.active .ingredients-list-item {
+	z-index: 2;
+	background-color: #ffd15b;
+}
+.ingredients-list-item,
+.appliances-list-item,
+.ustensils-list-item {
+	padding-left: 1rem;
+	word-wrap: break-word;
+}
+.ingredients-list,
+.appliances-list,
+.ustensils-list {
+	display: none;
+	z-index: 2;
+	position: relative;
+}
+.appliances-list {
+	background-color: #ff5b5b;
+}
+
+.appliances-list {
+	background-color: #ff5b5b;
+}
+.appliances-list.active {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.appliances-list.active .appliances-list-item {
+	z-index: 2;
+	background-color: #ff5b5b;
+}
+
+.ustensils-list {
+	background-color: #5bffc6;
+}
+.ustensils-list.active {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+.ustensils-list.active .ustensils-list-item {
+	z-index: 2;
+	background-color: #5bffc6;
 }
 
 .recipes-wrapper {
@@ -141,6 +209,7 @@ header a {
 	font-family: Manrope;
 	overflow: hidden;
 	transition: all 0.2s ease;
+	z-index: 1;
 }
 .card:hover {
 	cursor: pointer;

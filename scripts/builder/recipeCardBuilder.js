@@ -1,4 +1,15 @@
+import recipesProvider from '../data/recipesProvider.js';
+
 export default class RecipeCardBuilder {
+	static BuildAllCards() {
+		const recettes = document.querySelector('.recipes-wrapper');
+		const recipes = recipesProvider.findAll();
+
+		recipes.forEach((recipe) => {
+			recettes.innerHTML += this.buildCard(recipe);
+		});
+	}
+
 	static buildCard(recipe) {
 		return `
         <article class="card">
@@ -8,27 +19,27 @@ export default class RecipeCardBuilder {
                 alt="Illustration de la recette">
             </section>
                 <section class="informations">
-                <section class="time">${recipe.time} min</section>
+                    <section class="time">${recipe.time} min</section>
                     <h1 class="card-title">${recipe.name}</h1>
                     <section class="recette">
                         <h2 class="subtitle">Recette</h2>
                             <section class="description">
                             ${recipe.description}
                             </section>
-                            </section>
-                            <section class="necessaire">
+                    </section>
+                    <section class="necessaire">
                         <h3 class="subtitle">Ingrédients</h3>
                             <section class="ingredients">
-                            ${this.displayIngredients(recipe.ingredients)}
+                            ${this.displayIngredients(recipe.ingredientsData)}
                             </section>
-                            </section>
+                    </section>
                 </section>
         </article>
         `;
 	}
-	static displayIngredients(ingredients) {
+	static displayIngredients(ingredientsData) {
 		let html = '';
-		ingredients.forEach((ingredient) => {
+		ingredientsData.forEach((ingredient) => {
 			if (ingredient.unit && ingredient.quantity) {
 				html += `<div class="ingredient-container"><div class="ingredient">${ingredient.ingredient}</div>
             <div class="quantity">${ingredient.quantity} ${ingredient.unit}</div></div>`;
