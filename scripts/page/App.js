@@ -7,6 +7,24 @@ import ClickListener from '../eventListener/clickEvent.js';
 
 const recipe = RecipesProvider.findAll(recipes);
 
+const recipesData = new Set(recipe);
+
+const searchResult = new SearchResultDto(recipes);
+
+// Pour chaque recette stockée dans le Set, fabrication d'une carte et ajout au DOM
+
+RecipeCardBuilder.BuildAllCards(recipesData);
+
+// Pour chaque ingrédient, ajout au menu déroulant "Ingrédients"
+
+DropdownBuilder.buildIngredientDropdown(searchResult);
+DropdownBuilder.buildApplianceDropdown(searchResult);
+DropdownBuilder.buildUstensilsDropdown(searchResult);
+
+// Ecoute du click pour les évènements
+
+ClickListener.listen(searchResult);
+
 // const recipeBis = new recipesDto(
 // 	1,
 // 	'Recette01.jpg',
@@ -30,21 +48,3 @@ const recipe = RecipesProvider.findAll(recipes);
 // 	'Mixer',
 // 	['couteau', 'verres']
 // );
-const recipesData = new Set(recipe);
-console.log(recipesData);
-
-const searchResult = new SearchResultDto(recipes);
-
-// Pour chaque recette stockée dans le Set, fabrication d'une carte et ajout au DOM
-
-RecipeCardBuilder.BuildAllCards(recipesData);
-
-// Pour chaque ingrédient, ajout au menu déroulant "Ingrédients"
-
-DropdownBuilder.buildIngredientDropdown(searchResult);
-DropdownBuilder.buildApplianceDropdown(searchResult);
-DropdownBuilder.buildUstensilsDropdown(searchResult);
-
-// Ecoute du click pour les évènements
-
-ClickListener.listen();
