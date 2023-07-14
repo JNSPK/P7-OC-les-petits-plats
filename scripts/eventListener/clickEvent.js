@@ -11,7 +11,7 @@ export default class ClickListener {
 			const selectedTag = document.createElement('div');
 
 			if (e.target.classList.contains('selected')) {
-				e.target.parentNode.removeChild(e.target);
+				e.target.style.display = 'none';
 				const elementStyles = window.getComputedStyle(e.target);
 				const backgroundColor = elementStyles.backgroundColor;
 
@@ -31,6 +31,7 @@ export default class ClickListener {
 
 			if (e.target.classList.contains('remove-tag')) {
 				selectedTags.removeChild(e.target.parentNode);
+				console.log(e.target.parentNode);
 			}
 		});
 	}
