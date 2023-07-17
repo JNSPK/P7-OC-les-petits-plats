@@ -1,4 +1,5 @@
-import SearchResult from '../dto/searchResultDto.js';
+// import SearchResult from '../dto/searchResultDto.js';
+import DropdownBuilder from '../builder/dropdownBuilder.js';
 
 export default class ClickListener {
 	static listen(searchResult) {
@@ -9,6 +10,7 @@ export default class ClickListener {
 			this.toggleTagState(e, searchResult);
 			const selectedTags = document.querySelector('.selected-tags');
 			const selectedTag = document.createElement('div');
+			const isCloseButton = e.target.classList.contains('remove-tag');
 
 			if (e.target.classList.contains('selected')) {
 				e.target.style.display = 'none';
@@ -29,9 +31,13 @@ export default class ClickListener {
 				selectedTags.appendChild(selectedTag);
 			}
 
-			if (e.target.classList.contains('remove-tag')) {
+			if (isCloseButton) {
 				selectedTags.removeChild(e.target.parentNode);
-				console.log(e.target.parentNode);
+				const targetedIngredient =
+					e.target.parentNode.textContent.toUpperCase();
+				searchResult.removeTagIngredient(targetedIngredient);
+
+				DropdownBuilder.buildIngredientDropdown(searchResult);
 			}
 		});
 	}
@@ -42,7 +48,9 @@ export default class ClickListener {
 			return false;
 		}
 
-		e.target.nextElementSibling.classList.toggle('active');
+		const dropdownMenu = e.target.nextElementSibling;
+
+		dropdownMenu.classList.toggle('active');
 	}
 
 	static toggleTagState(e, searchResult) {
@@ -62,26 +70,19 @@ export default class ClickListener {
 
 		if (isIngredientTag) {
 			const targetedIngredient = e.target.textContent.toUpperCase();
+
 			// Ajouter l'ingrédient aux tags
 			searchResult.addTagIngredient(targetedIngredient);
-
-			// // Supprimer l'ingrédient de la liste d'ingrédients
-			// searchResult.listIngredients.delete(targetedIngredient);
 		} else if (isApplianceTag) {
 			const targetedAppliance = e.target.textContent.toUpperCase();
 
 			// Ajouter l'appareil aux tags
 			searchResult.addTagAppliance(targetedAppliance);
-
-			// // Supprimer l'appareil de la liste d'ingrédients
-			// searchResult.listAppliances.delete(targetedAppliance);
 		} else if (isUstensilTag) {
 			const targetedUstensil = e.target.textContent.toUpperCase();
+
 			// Ajouter l'ingrédient aux tags
 			searchResult.addTagUstensil(targetedUstensil);
-
-			// // Supprimer l'ingrédient de la liste d'ingrédients
-			// searchResult.listUstensils.delete(targetedUstensil);
 		}
 		////////////////////////////////////////////////////////////////////
 

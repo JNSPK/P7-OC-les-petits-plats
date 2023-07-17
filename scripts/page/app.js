@@ -4,6 +4,7 @@ import SearchResultDto from '../dto/searchResultDto.js';
 import RecipeCardBuilder from '../builder/recipeCardBuilder.js';
 import DropdownBuilder from '../builder/dropdownBuilder.js';
 import ClickListener from '../eventListener/clickEvent.js';
+import KeyListener from '../eventListener/keyEvent.js';
 
 const recipe = RecipesProvider.findAll(recipes);
 
@@ -25,26 +26,6 @@ DropdownBuilder.buildUstensilsDropdown(searchResult);
 
 ClickListener.listen(searchResult);
 
-// const recipeBis = new recipesDto(
-// 	1,
-// 	'Recette01.jpg',
-// 	'Limonade de Coco',
-// 	[
-// 		{
-// 			ingredient: 'Lait de coco',
-// 			quantity: 400,
-// 			unit: 'ml',
-// 		},
-// 		{
-// 			ingredient: 'Banane',
-// 			quantity: 2,
-// 		},
-// 		{
-// 			ingredient: 'Glaçons',
-// 		},
-// 	],
-// 	10,
-// 	"Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
-// 	'Mixer',
-// 	['couteau', 'verres']
-// );
+// Ecoute du keydown pour les recherches au sein des dropdowns
+
+KeyListener.listen(searchResult);

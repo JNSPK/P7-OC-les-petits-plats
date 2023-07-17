@@ -137,7 +137,7 @@ header a {
 	margin-bottom: 0.5rem;
 }
 
-.ingredients-list,
+.ingredients-list-container,
 .appliances-list,
 .ustensils-list {
 	display: none;
@@ -146,16 +146,16 @@ header a {
 	z-index: 2;
 	position: relative;
 }
-.ingredients-list {
+.ingredients-list-container {
 	background-color: #ffd15b;
 }
 
-.ingredients-list.active {
+.ingredients-list-container.active {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 }
-.ingredients-list.active .ingredients-list-item {
+.ingredients-list-container.active .ingredients-list-item {
 	z-index: 2;
 	background-color: #ffd15b;
 }
@@ -171,6 +171,7 @@ header a {
 .ingredients-list,
 .appliances-list,
 .ustensils-list {
+	width: 100%;
 }
 .appliances-list {
 	background-color: #ff5b5b;

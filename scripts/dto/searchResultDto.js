@@ -7,6 +7,7 @@ export default class SearchResult {
 		this.tagIngredients = new Set();
 		this.tagAppliances = new Set();
 		this.tagUstensils = new Set();
+		this.filteredIngredients = [...this.listIngredients];
 
 		recipesDto.forEach((recipeDto) => {
 			recipeDto.ingredients.forEach((ingredient) => {
@@ -26,13 +27,41 @@ export default class SearchResult {
 
 		console.log(this);
 	}
+
 	addTagIngredient(ingredient) {
-		this.tagIngredients.add(ingredient);
+		if (
+			!this.tagIngredients.has(ingredient) &&
+			this.listIngredients.has(ingredient)
+		) {
+			this.tagIngredients.add(ingredient);
+			this.listIngredients.delete(ingredient);
+		}
 	}
+
+	removeTagIngredient(ingredient) {
+		if (
+			this.tagIngredients.has(ingredient) &&
+			!this.listIngredients.has(ingredient)
+		) {
+			this.tagIngredients.delete(ingredient);
+			this.listIngredients.add(ingredient);
+		}
+	}
+
 	addTagAppliance(appliance) {
 		this.tagAppliances.add(appliance);
 	}
 	addTagUstensil(ustensil) {
 		this.tagUstensils.add(ustensil);
+	}
+	filterIngredients(searchValue) {
+		// Réinitialiser filteredIngredients avec les ingrédients non filtrés lorsque la recherche est vide
+		if (searchValue.trim() === '') {
+			this.filteredIngredients = [...this.listIngredients].sort();
+		} else {
+			this.filteredIngredients = [...this.listIngredients]
+				.filter((ingredient) => ingredient.includes(searchValue.toUpperCase()))
+				.sort();
+		}
 	}
 }

@@ -1,23 +1,22 @@
 export default class DropdownBuilder {
 	static buildIngredientDropdown(searchResult) {
 		const list = document.querySelector('.ingredients-list');
-		const inputContainer = document.createElement('span');
-		const inputIngredients = document.createElement('input');
 
-		inputContainer.classList.add('input-container');
-		inputIngredients.classList.add('input-ingredients');
-		inputIngredients.setAttribute('placeholder', 'Recherche');
+		list.innerHTML = '';
 
-		list.appendChild(inputContainer);
-		inputContainer.appendChild(inputIngredients);
+		const ingredientsToDisplay =
+			searchResult.filteredIngredients.length > 0
+				? searchResult.filteredIngredients
+				: searchResult.listIngredients;
 
-		searchResult.listIngredients.forEach((ingredient) => {
+		ingredientsToDisplay.forEach((ingredient) => {
 			const option = document.createElement('option');
 			option.classList.add('ingredients-list-item');
 			option.classList.add('tag');
 			option.textContent = ingredient;
 			list.appendChild(option);
 		});
+		// console.log(ingredientsToDisplay);
 	}
 
 	static buildApplianceDropdown(searchResult) {
