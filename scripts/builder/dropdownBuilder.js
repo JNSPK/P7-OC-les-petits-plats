@@ -7,7 +7,7 @@ export default class DropdownBuilder {
 		const ingredientsToDisplay =
 			searchResult.filteredIngredients.length > 0
 				? searchResult.filteredIngredients
-				: searchResult.listIngredients;
+				: [...searchResult.listIngredients].sort();
 
 		ingredientsToDisplay.forEach((ingredient) => {
 			const option = document.createElement('option');
@@ -16,7 +16,7 @@ export default class DropdownBuilder {
 			option.textContent = ingredient;
 			list.appendChild(option);
 		});
-		// console.log(ingredientsToDisplay);
+		console.log(ingredientsToDisplay);
 	}
 
 	static buildApplianceDropdown(searchResult) {
