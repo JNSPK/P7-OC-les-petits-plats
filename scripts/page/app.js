@@ -18,8 +18,8 @@ RecipeCardBuilder.BuildAllCards(recipesData);
 
 // Pour chaque ingrédient, ajout au menu déroulant "Ingrédients"
 
-DropdownBuilder.buildIngredientDropdown(searchResult);
-DropdownBuilder.buildApplianceDropdown(searchResult);
+DropdownBuilder.buildIngredientsDropdown(searchResult);
+DropdownBuilder.buildAppliancesDropdown(searchResult);
 DropdownBuilder.buildUstensilsDropdown(searchResult);
 
 // Ecoute du click pour les évènements

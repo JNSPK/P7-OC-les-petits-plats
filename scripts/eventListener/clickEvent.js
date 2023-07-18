@@ -14,6 +14,16 @@ export default class ClickListener {
 
 			if (e.target.classList.contains('selected')) {
 				e.target.style.display = 'none';
+
+				const isIngredientTag = e.target.classList.contains(
+					'ingredients-list-item'
+				);
+				const isApplianceTag = e.target.classList.contains(
+					'appliances-list-item'
+				);
+				const isUstensilTag = e.target.classList.contains(
+					'ustensils-list-item'
+				);
 				const elementStyles = window.getComputedStyle(e.target);
 				const backgroundColor = elementStyles.backgroundColor;
 
@@ -22,6 +32,17 @@ export default class ClickListener {
 				const closeButton = document.createElement('div');
 
 				selectedTag.classList.add('selected-tag');
+
+				if (isIngredientTag) {
+					selectedTag.classList.add('ingredient-tag');
+				}
+				if (isApplianceTag) {
+					selectedTag.classList.add('appliance-tag');
+				}
+				if (isUstensilTag) {
+					selectedTag.classList.add('ustensil-tag');
+				}
+
 				closeButton.classList.add('remove-tag');
 
 				selectedTag.innerHTML = e.target.textContent;
@@ -29,15 +50,37 @@ export default class ClickListener {
 				selectedTag.style.backgroundColor = backgroundColor;
 
 				selectedTags.appendChild(selectedTag);
+				console.log(searchResult);
 			}
 
 			if (isCloseButton) {
 				selectedTags.removeChild(e.target.parentNode);
 				const targetedIngredient =
 					e.target.parentNode.textContent.toUpperCase();
-				searchResult.removeTagIngredient(targetedIngredient);
+				const targetedAppliance = e.target.parentNode.textContent.toUpperCase();
+				const targetedUstensil = e.target.parentNode.textContent.toUpperCase();
 
-				DropdownBuilder.buildIngredientDropdown(searchResult);
+				const isIngredientTag =
+					e.target.parentNode.classList.contains('ingredient-tag');
+				const isApplianceTag =
+					e.target.parentNode.classList.contains('appliance-tag');
+				const isUstensilTag =
+					e.target.parentNode.classList.contains('ustensil-tag');
+
+				if (isIngredientTag) {
+					searchResult.removeTagIngredient(targetedIngredient);
+					DropdownBuilder.buildIngredientsDropdown(searchResult);
+				}
+				if (isApplianceTag) {
+					searchResult.removeTagAppliance(targetedAppliance);
+					DropdownBuilder.buildAppliancesDropdown(searchResult);
+				}
+				if (isUstensilTag) {
+					searchResult.removeTagUstensil(targetedUstensil);
+					DropdownBuilder.buildUstensilsDropdown(searchResult);
+				}
+
+				console.log(searchResult);
 			}
 		});
 	}

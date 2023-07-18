@@ -8,6 +8,8 @@ export default class SearchResult {
 		this.tagAppliances = new Set();
 		this.tagUstensils = new Set();
 		this.filteredIngredients = [...this.listIngredients];
+		this.filteredAppliances = [...this.listAppliances];
+		this.filteredUstensils = [...this.listUstensils];
 
 		recipesDto.forEach((recipeDto) => {
 			recipeDto.ingredients.forEach((ingredient) => {
@@ -19,13 +21,21 @@ export default class SearchResult {
 				}
 			});
 			recipeDto.ustensils.forEach((ustensil) => {
-				this.listUstensils.add(ustensil.toUpperCase());
+				const ustensilName = ustensil.toUpperCase();
+				if (!this.listUstensils.has(ustensilName)) {
+					if (!this.tagUstensils.has(ustensilName)) {
+						this.listUstensils.add(ustensilName);
+					}
+				}
 			});
 
-			this.listAppliances.add(recipeDto.appliance.toUpperCase());
+			const applianceName = recipeDto.appliance.toUpperCase();
+			if (!this.listAppliances.has(applianceName)) {
+				if (!this.tagAppliances.has(applianceName)) {
+					this.listAppliances.add(applianceName);
+				}
+			}
 		});
-
-		console.log(this);
 	}
 
 	addTagIngredient(ingredient) {
@@ -49,11 +59,36 @@ export default class SearchResult {
 	}
 
 	addTagAppliance(appliance) {
-		this.tagAppliances.add(appliance);
+		if (
+			!this.tagAppliances.has(appliance) &&
+			this.listAppliances.has(appliance)
+		) {
+			this.tagAppliances.add(appliance);
+			this.listAppliances.delete(appliance);
+		}
+	}
+	removeTagAppliance(appliance) {
+		if (
+			this.tagAppliances.has(appliance) &&
+			!this.listAppliances.has(appliance)
+		) {
+			this.tagAppliances.delete(appliance);
+			this.listAppliances.add(appliance);
+		}
 	}
 	addTagUstensil(ustensil) {
-		this.tagUstensils.add(ustensil);
+		if (!this.tagUstensils.has(ustensil) && this.listUstensils.has(ustensil)) {
+			this.tagUstensils.add(ustensil);
+			this.listUstensils.delete(ustensil);
+		}
 	}
+	removeTagUstensil(ustensil) {
+		if (this.tagUstensils.has(ustensil) && !this.listUstensils.has(ustensil)) {
+			this.tagUstensils.delete(ustensil);
+			this.listUstensils.add(ustensil);
+		}
+	}
+
 	filterIngredients(searchValue) {
 		// Réinitialiser filteredIngredients avec les ingrédients non filtrés lorsque la recherche est vide
 		if (searchValue.trim() === '') {
@@ -61,6 +96,26 @@ export default class SearchResult {
 		} else {
 			this.filteredIngredients = [...this.listIngredients]
 				.filter((ingredient) => ingredient.includes(searchValue.toUpperCase()))
+				.sort();
+		}
+	}
+	filterAppliances(searchValue) {
+		// Réinitialiser filteredAppliances avec les ingrédients non filtrés lorsque la recherche est vide
+		if (searchValue.trim() === '') {
+			this.filteredAppliances = [...this.listAppliances].sort();
+		} else {
+			this.filteredAppliances = [...this.listAppliances]
+				.filter((appliance) => appliance.includes(searchValue.toUpperCase()))
+				.sort();
+		}
+	}
+	filterUstensils(searchValue) {
+		// Réinitialiser filteredUstensils avec les ingrédients non filtrés lorsque la recherche est vide
+		if (searchValue.trim() === '') {
+			this.filteredUstensils = [...this.listUstensils].sort();
+		} else {
+			this.filteredUstensils = [...this.listUstensils]
+				.filter((ustensil) => ustensil.includes(searchValue.toUpperCase()))
 				.sort();
 		}
 	}
