@@ -1,31 +1,20 @@
-import { recipes } from '../data/recipes.js';
 import RecipesProvider from '../data/recipesProvider.js';
-import SearchResultDto from '../dto/searchResultDto.js';
-import RecipeCardBuilder from '../builder/recipeCardBuilder.js';
-import DropdownBuilder from '../builder/dropdownBuilder.js';
 import ClickListener from '../eventListener/clickEvent.js';
 import KeyListener from '../eventListener/keyEvent.js';
+import SearchService from '../dto/searchService.js';
 
-const recipe = RecipesProvider.findAll(recipes);
+const recipes = RecipesProvider.findAll();
 
-const recipesData = new Set(recipe);
+const searchService = new SearchService(recipes);
 
-const searchResult = new SearchResultDto(recipes);
-
-// Pour chaque recette stockée dans le Set, fabrication d'une carte et ajout au DOM
-
-RecipeCardBuilder.BuildAllCards(recipesData);
-
-// Pour chaque ingrédient, ajout au menu déroulant "Ingrédients"
-
-DropdownBuilder.buildIngredientsDropdown(searchResult);
-DropdownBuilder.buildAppliancesDropdown(searchResult);
-DropdownBuilder.buildUstensilsDropdown(searchResult);
+searchService.search();
 
 // Ecoute du click pour les évènements
 
-ClickListener.listen(searchResult);
+ClickListener.listen(searchService);
 
 // Ecoute du keydown pour les recherches au sein des dropdowns
 
-KeyListener.listen(searchResult);
+// KeyListener.listen(searchService);
+
+// console.log(searchResult);

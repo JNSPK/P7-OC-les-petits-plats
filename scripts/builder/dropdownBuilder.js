@@ -18,7 +18,6 @@ export default class DropdownBuilder {
 				ingredient.slice(1).toLowerCase();
 			list.appendChild(option);
 		});
-		console.log(ingredientsToDisplay);
 	}
 
 	static buildAppliancesDropdown(searchResult) {
@@ -39,7 +38,7 @@ export default class DropdownBuilder {
 				appliance.slice(0, 1).toUpperCase() + appliance.slice(1).toLowerCase();
 			list.appendChild(option);
 		});
-		console.log(appliancesToDisplay);
+		// console.log(appliancesToDisplay);
 	}
 
 	static buildUstensilsDropdown(searchResult) {
@@ -59,6 +58,6 @@ export default class DropdownBuilder {
 				ustensil.slice(0, 1).toUpperCase() + ustensil.slice(1).toLowerCase();
 			list.appendChild(option);
 		});
-		console.log(ustensilsToDisplay);
+		// console.log(ustensilsToDisplay);
 	}
 }

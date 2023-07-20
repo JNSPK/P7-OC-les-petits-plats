@@ -1,10 +1,7 @@
-import recipesProvider from '../data/recipesProvider.js';
-
 export default class RecipeCardBuilder {
-	static BuildAllCards() {
+	static BuildAllCards(recipes) {
 		const recettes = document.querySelector('.recipes-wrapper');
-		const recipes = recipesProvider.findAll();
-
+		recettes.innerHTML = '';
 		recipes.forEach((recipe) => {
 			recettes.innerHTML += this.buildCard(recipe);
 		});

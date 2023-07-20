@@ -15,17 +15,52 @@ export default class RecipeDto {
 		this.name = name;
 		this.servings = servings;
 		this.ingredients = new Set();
-		ingredients.forEach((ingredient) => {
-			this.ingredients.add(ingredient.ingredient);
-		});
+		ingredients.forEach((ingredient) =>
+			addPluralFormToSet(ingredient.ingredient, this.ingredients)
+		);
 		this.ingredientsData = new Set([...ingredients]);
 		this.time = time;
 		this.description = description;
 		this.appliance = new Set([appliance]);
-		this.ustensils = new Set([...ustensils]); // Retrait des doublons, majuscules, minuscules, pluriel, singulier
+		this.ustensils = new Set();
+		ustensils.forEach((ustensil) =>
+			addPluralFormToSet(ustensil, this.ustensils)
+		); // Retrait des doublons, majuscules, minuscules, pluriel, singulier
+	}
+	isValidInput(inputValue) {
+		const isValid =
+			this.name.toUpperCase().includes(inputValue) ||
+			this.ingredients.has(inputValue.toUpperCase()) ||
+			this.description.toUpperCase().includes(inputValue) ||
+			inputValue == '';
+
+		return isValid;
+	}
+	hasIngredient(ingredientsSelected) {
+		const hasIngredient =
+			this.ingredients.has(ingredientsSelected) || ingredientsSelected == '';
+		console.log(hasIngredient);
+		return hasIngredient;
+	}
+	hasUstensil(ustensilsSelected) {
+		const hasUstensil =
+			this.ustensils.has(ustensilsSelected) || ustensilsSelected == '';
+		return hasUstensil;
+	}
+	hasAppliance(appliancesSelected) {
+		const hasAppliance =
+			this.appliance.has(appliancesSelected) || appliancesSelected == '';
+		return hasAppliance;
 	}
 
 	// cleanValues() {
-	// 	new Set()
+	// 	new Set();
 	// }
+}
+function addPluralFormToSet(value, set) {
+	const pluriel = value + 's';
+
+	if (!set.has(pluriel)) {
+		set.add(value.toUpperCase());
+	}
 }
