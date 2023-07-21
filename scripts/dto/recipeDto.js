@@ -21,7 +21,7 @@ export default class RecipeDto {
 		this.ingredientsData = new Set([...ingredients]);
 		this.time = time;
 		this.description = description;
-		this.appliance = new Set([appliance]);
+		this.appliance = new Set([appliance.toUpperCase()]);
 		this.ustensils = new Set();
 		ustensils.forEach((ustensil) =>
 			addPluralFormToSet(ustensil, this.ustensils)
@@ -38,18 +38,21 @@ export default class RecipeDto {
 	}
 	hasIngredient(ingredientsSelected) {
 		const hasIngredient =
-			this.ingredients.has(ingredientsSelected) || ingredientsSelected == '';
-		console.log(hasIngredient);
+			this.ingredients.has(ingredientsSelected.toString()) ||
+			ingredientsSelected == '';
+
 		return hasIngredient;
 	}
 	hasUstensil(ustensilsSelected) {
 		const hasUstensil =
-			this.ustensils.has(ustensilsSelected) || ustensilsSelected == '';
+			this.ustensils.has(ustensilsSelected.toString()) ||
+			ustensilsSelected == '';
 		return hasUstensil;
 	}
 	hasAppliance(appliancesSelected) {
 		const hasAppliance =
-			this.appliance.has(appliancesSelected) || appliancesSelected == '';
+			this.appliance.has(appliancesSelected.toString()) ||
+			appliancesSelected == '';
 		return hasAppliance;
 	}
 

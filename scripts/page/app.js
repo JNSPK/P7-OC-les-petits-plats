@@ -1,5 +1,5 @@
 import RecipesProvider from '../data/recipesProvider.js';
-import ClickListener from '../eventListener/clickEvent.js';
+import EventListener from '../eventListener/eventListener.js';
 import KeyListener from '../eventListener/keyEvent.js';
 import SearchService from '../dto/searchService.js';
 
@@ -11,7 +11,7 @@ searchService.search();
 
 // Ecoute du click pour les évènements
 
-ClickListener.listen(searchService);
+EventListener.listen(searchService);
 
 // Ecoute du keydown pour les recherches au sein des dropdowns
 
