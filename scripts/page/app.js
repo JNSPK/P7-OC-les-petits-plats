@@ -1,6 +1,5 @@
 import RecipesProvider from '../data/recipesProvider.js';
 import EventListener from '../eventListener/eventListener.js';
-import KeyListener from '../eventListener/keyEvent.js';
 import SearchService from '../dto/searchService.js';
 
 const recipes = RecipesProvider.findAll();

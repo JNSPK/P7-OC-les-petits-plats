@@ -273,18 +273,18 @@ header a {
 .recipes-wrapper {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	justify-items: center;
+	justify-items: baseline;
 	row-gap: 3rem;
 	column-gap: 5rem;
-	padding-left: 6rem;
-	padding-right: 6rem;
-	padding-top: 2rem;
+	padding: 2rem 6rem;
 }
 
 .card {
 	position: relative;
 	background-color: #ffff;
 	width: 100%;
+	min-width: 10rem;
+	max-width: 25rem;
 	height: 40rem;
 	border-radius: 5px;
 	display: flex;

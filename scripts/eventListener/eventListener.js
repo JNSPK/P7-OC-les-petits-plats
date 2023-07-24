@@ -1,10 +1,6 @@
 export default class EventListener {
 	static listen(searchService) {
-		const dropdownsMenus = document.querySelector('.dropdowns');
 		const dropdownsAndTags = document.querySelector('.dropdowns-and-tags');
-
-		const selectedTagsArea = document.querySelector('.selected-tags');
-		const selectedTags = document.querySelectorAll('.selected-tag');
 
 		dropdownsAndTags.addEventListener('click', (e) => {
 			this.toggleMenu(e);
@@ -16,10 +12,6 @@ export default class EventListener {
 			}
 			console.log(searchService);
 		});
-
-		// selectedTagsArea.addEventListener('click', (e) => {
-
-		// });
 
 		this.inputListen(searchService);
 		this.inputSubmit(searchService);
@@ -73,6 +65,16 @@ export default class EventListener {
 				searchService.searchParams.ingredientsSelected.push(
 					e.target.textContent.toUpperCase()
 				);
+				if (
+					searchService.searchParams.ingredientsSelected.includes(
+						e.target.textContent.toUpperCase()
+					)
+				) {
+					searchService.searchResult.listIngredients.delete(
+						e.target.textContent
+					);
+				}
+
 				// searchService.searchResult.listIngredients.delete(e.target);
 			}
 			if (isApplianceTag) {

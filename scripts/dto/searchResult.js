@@ -14,7 +14,6 @@ export default class SearchResult {
 		recipesDto.forEach((recipeDto) => {
 			recipeDto.ingredients.forEach((ingredient) => {
 				const ingredientName = ingredient.toUpperCase();
-
 				if (!this.listIngredients.has(ingredientName)) {
 					if (!this.tagIngredients.has(ingredientName)) {
 						this.listIngredients.add(ingredientName);
@@ -51,57 +50,6 @@ export default class SearchResult {
 			});
 		});
 	}
-
-	// 	addTagIngredient(ingredient) {
-	// 		if (
-	// 			!this.tagIngredients.has(ingredient) &&
-	// 			this.listIngredients.has(ingredient)
-	// 		) {
-	// 			this.tagIngredients.add(ingredient);
-	// 			this.listIngredients.delete(ingredient);
-	// 		}
-	// 	}
-
-	// 	removeTagIngredient(ingredient) {
-	// 		if (
-	// 			this.tagIngredients.has(ingredient) &&
-	// 			!this.listIngredients.has(ingredient)
-	// 		) {
-	// 			this.tagIngredients.delete(ingredient);
-	// 			this.listIngredients.add(ingredient);
-	// 		}
-	// 	}
-
-	// 	addTagAppliance(appliance) {
-	// 		if (
-	// 			!this.tagAppliances.has(appliance) &&
-	// 			this.listAppliances.has(appliance)
-	// 		) {
-	// 			this.tagAppliances.add(appliance);
-	// 			this.listAppliances.delete(appliance);
-	// 		}
-	// 	}
-	// 	removeTagAppliance(appliance) {
-	// 		if (
-	// 			this.tagAppliances.has(appliance) &&
-	// 			!this.listAppliances.has(appliance)
-	// 		) {
-	// 			this.tagAppliances.delete(appliance);
-	// 			this.listAppliances.add(appliance);
-	// 		}
-	// 	}
-	// 	addTagUstensil(ustensil) {
-	// 		if (!this.tagUstensils.has(ustensil) && this.listUstensils.has(ustensil)) {
-	// 			this.tagUstensils.add(ustensil);
-	// 			this.listUstensils.delete(ustensil);
-	// 		}
-	// 	}
-	// 	removeTagUstensil(ustensil) {
-	// 		if (this.tagUstensils.has(ustensil) && !this.listUstensils.has(ustensil)) {
-	// 			this.tagUstensils.delete(ustensil);
-	// 			this.listUstensils.add(ustensil);
-	// 		}
-	// 	}
 
 	// 	filterIngredients(searchValue) {
 	// 		// Réinitialiser filteredIngredients avec les ingrédients non filtrés lorsque la recherche est vide

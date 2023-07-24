@@ -1,13 +1,18 @@
 export default class DropdownBuilder {
-	static buildIngredientsDropdown(searchResult) {
+	static buildIngredientsDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.ingredients-list');
 
 		list.innerHTML = '';
 
 		const ingredientsToDisplay =
-			searchResult.filteredIngredients.length > 0
-				? searchResult.filteredIngredients
+			searchParams.ingredientsSelected.length > 0
+				? [...searchResult.listIngredients].filter(
+						(ingredient) =>
+							!searchParams.ingredientsSelected.includes(ingredient)
+				  )
 				: [...searchResult.listIngredients].sort();
+
+		console.log(ingredientsToDisplay);
 
 		ingredientsToDisplay.forEach((ingredient) => {
 			const option = document.createElement('option');
@@ -20,14 +25,16 @@ export default class DropdownBuilder {
 		});
 	}
 
-	static buildAppliancesDropdown(searchResult) {
+	static buildAppliancesDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.appliances-list');
 
 		list.innerHTML = '';
 
 		const appliancesToDisplay =
-			searchResult.filteredAppliances.length > 0
-				? searchResult.filteredAppliances
+			searchParams.appliancesSelected.length > 0
+				? [...searchResult.listAppliances].filter(
+						(appliance) => !searchParams.appliancesSelected.includes(appliance)
+				  )
 				: [...searchResult.listAppliances].sort();
 
 		appliancesToDisplay.forEach((appliance) => {
@@ -41,13 +48,15 @@ export default class DropdownBuilder {
 		// console.log(appliancesToDisplay);
 	}
 
-	static buildUstensilsDropdown(searchResult) {
+	static buildUstensilsDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.ustensils-list');
 
 		list.innerHTML = '';
 		const ustensilsToDisplay =
-			searchResult.filteredUstensils.length > 0
-				? searchResult.filteredUstensils
+			searchParams.ustensilsSelected.length > 0
+				? [...searchResult.listUstensils].filter(
+						(ustensil) => !searchParams.ustensilsSelected.includes(ustensil)
+				  )
 				: [...searchResult.listUstensils].sort();
 
 		ustensilsToDisplay.forEach((ustensil) => {

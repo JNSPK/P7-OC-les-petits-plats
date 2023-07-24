@@ -30,8 +30,17 @@ export default class SearchService {
 	refreshDropdowns() {
 		// Pour chaque ingrédient, ajout au menu déroulant "Ingrédients"
 
-		DropdownBuilder.buildIngredientsDropdown(this.searchResult);
-		DropdownBuilder.buildAppliancesDropdown(this.searchResult);
-		DropdownBuilder.buildUstensilsDropdown(this.searchResult);
+		DropdownBuilder.buildIngredientsDropdown(
+			this.searchResult,
+			this.searchParams
+		);
+		DropdownBuilder.buildAppliancesDropdown(
+			this.searchResult,
+			this.searchParams
+		);
+		DropdownBuilder.buildUstensilsDropdown(
+			this.searchResult,
+			this.searchParams
+		);
 	}
 }

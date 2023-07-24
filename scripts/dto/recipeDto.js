@@ -37,22 +37,35 @@ export default class RecipeDto {
 		return isValid;
 	}
 	hasIngredient(ingredientsSelected) {
+		const upperCaseSelectedIngredients = ingredientsSelected.map((ingredient) =>
+			ingredient.toUpperCase()
+		);
 		const hasIngredient =
-			this.ingredients.has(ingredientsSelected.toString()) ||
-			ingredientsSelected == '';
+			upperCaseSelectedIngredients.every((ingredient) =>
+				this.ingredients.has(ingredient)
+			) || ingredientsSelected.length === 0;
 
 		return hasIngredient;
 	}
 	hasUstensil(ustensilsSelected) {
+		const upperCaseSelectedUstensils = ustensilsSelected.map((ustensil) =>
+			ustensil.toUpperCase()
+		);
 		const hasUstensil =
-			this.ustensils.has(ustensilsSelected.toString()) ||
-			ustensilsSelected == '';
+			upperCaseSelectedUstensils.every((ustensil) =>
+				this.ustensils.has(ustensil)
+			) || ustensilsSelected.length === 0;
 		return hasUstensil;
 	}
+
 	hasAppliance(appliancesSelected) {
+		const upperCaseSelectedAppliances = appliancesSelected.map((appliance) =>
+			appliance.toUpperCase()
+		);
 		const hasAppliance =
-			this.appliance.has(appliancesSelected.toString()) ||
-			appliancesSelected == '';
+			upperCaseSelectedAppliances.every((appliance) =>
+				this.appliance.has(appliance)
+			) || appliancesSelected.length === 0;
 		return hasAppliance;
 	}
 
