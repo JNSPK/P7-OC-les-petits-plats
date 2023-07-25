@@ -4,15 +4,25 @@ export default class DropdownBuilder {
 
 		list.innerHTML = '';
 
-		const ingredientsToDisplay =
-			searchParams.ingredientsSelected.length > 0
-				? [...searchResult.listIngredients].filter(
-						(ingredient) =>
-							!searchParams.ingredientsSelected.includes(ingredient)
-				  )
-				: [...searchResult.listIngredients].sort();
+		let ingredientsToDisplay = [];
 
-		console.log(ingredientsToDisplay);
+		if (
+			(searchParams.ingredientsSelected.length > 0 &&
+				searchResult.filteredIngredients.length > 0) ||
+			(searchResult.filteredIngredients.length > 0 &&
+				searchParams.ingredientsSelected.length > 0 == 0)
+		) {
+			const filteredIngredients = searchResult.filteredIngredients;
+
+			ingredientsToDisplay = [...searchResult.listIngredients]
+				.filter((ingredient) => filteredIngredients.includes(ingredient))
+				.sort();
+		} else if (searchParams.ingredientsSelected.length >= 0) {
+			const selectedIngredients = searchParams.ingredientsSelected;
+			ingredientsToDisplay = [...searchResult.listIngredients]
+				.filter((ingredient) => !selectedIngredients.includes(ingredient))
+				.sort();
+		}
 
 		ingredientsToDisplay.forEach((ingredient) => {
 			const option = document.createElement('option');
@@ -25,17 +35,34 @@ export default class DropdownBuilder {
 		});
 	}
 
+	// static buildFilteredIngredientsDropdown(searchResult) {
+
+	// }
+
 	static buildAppliancesDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.appliances-list');
 
 		list.innerHTML = '';
 
-		const appliancesToDisplay =
-			searchParams.appliancesSelected.length > 0
-				? [...searchResult.listAppliances].filter(
-						(appliance) => !searchParams.appliancesSelected.includes(appliance)
-				  )
-				: [...searchResult.listAppliances].sort();
+		let appliancesToDisplay = [];
+
+		if (
+			(searchParams.appliancesSelected.length > 0 &&
+				searchResult.filteredAppliances.length > 0) ||
+			(searchResult.filteredAppliances.length > 0 &&
+				searchParams.appliancesSelected.length > 0 == 0)
+		) {
+			const filteredAppliances = searchResult.filteredAppliances;
+
+			appliancesToDisplay = [...searchResult.listAppliances]
+				.filter((appliance) => filteredAppliances.includes(appliance))
+				.sort();
+		} else if (searchParams.appliancesSelected.length >= 0) {
+			const selectedAppliances = searchParams.appliancesSelected;
+			appliancesToDisplay = [...searchResult.listAppliances]
+				.filter((appliance) => !selectedAppliances.includes(appliance))
+				.sort();
+		}
 
 		appliancesToDisplay.forEach((appliance) => {
 			const option = document.createElement('option');
@@ -45,19 +72,31 @@ export default class DropdownBuilder {
 				appliance.slice(0, 1).toUpperCase() + appliance.slice(1).toLowerCase();
 			list.appendChild(option);
 		});
-		// console.log(appliancesToDisplay);
 	}
 
 	static buildUstensilsDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.ustensils-list');
 
 		list.innerHTML = '';
-		const ustensilsToDisplay =
-			searchParams.ustensilsSelected.length > 0
-				? [...searchResult.listUstensils].filter(
-						(ustensil) => !searchParams.ustensilsSelected.includes(ustensil)
-				  )
-				: [...searchResult.listUstensils].sort();
+		let ustensilsToDisplay = [];
+
+		if (
+			(searchParams.ustensilsSelected.length > 0 &&
+				searchResult.filteredUstensils.length > 0) ||
+			(searchResult.filteredUstensils.length > 0 &&
+				searchParams.ustensilsSelected.length > 0 == 0)
+		) {
+			const filteredUstensils = searchResult.filteredUstensils;
+
+			ustensilsToDisplay = [...searchResult.listUstensils]
+				.filter((ustensil) => filteredUstensils.includes(ustensil))
+				.sort();
+		} else if (searchParams.ustensilsSelected.length >= 0) {
+			const selectedUstensils = searchParams.ustensilsSelected;
+			ustensilsToDisplay = [...searchResult.listUstensils]
+				.filter((ustensil) => !selectedUstensils.includes(ustensil))
+				.sort();
+		}
 
 		ustensilsToDisplay.forEach((ustensil) => {
 			const option = document.createElement('option');

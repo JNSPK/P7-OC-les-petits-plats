@@ -13,6 +13,11 @@ export default class EventListener {
 			console.log(searchService);
 		});
 
+		dropdownsAndTags.addEventListener('keyup', (e) => {
+			this.dropdownTagFilter(e, searchService);
+			console.log(searchService);
+		});
+
 		this.inputListen(searchService);
 		this.inputSubmit(searchService);
 	}
@@ -60,22 +65,16 @@ export default class EventListener {
 		if (e.target.classList.contains('selected')) {
 			e.target.style.display = 'none';
 
-			if (isIngredientTag) {
+			if (
+				isIngredientTag &&
+				!searchService.searchParams.ingredientsSelected.includes(
+					e.target.textContent.toUpperCase()
+				)
+			) {
 				selectedTag.classList.add('ingredient-tag');
 				searchService.searchParams.ingredientsSelected.push(
 					e.target.textContent.toUpperCase()
 				);
-				if (
-					searchService.searchParams.ingredientsSelected.includes(
-						e.target.textContent.toUpperCase()
-					)
-				) {
-					searchService.searchResult.listIngredients.delete(
-						e.target.textContent
-					);
-				}
-
-				// searchService.searchResult.listIngredients.delete(e.target);
 			}
 			if (isApplianceTag) {
 				selectedTag.classList.add('appliance-tag');
@@ -160,5 +159,24 @@ export default class EventListener {
 				searchService.search(e);
 			}
 		});
+	}
+
+	static dropdownTagFilter(e, searchService) {
+		const searchValue = e.target.value.toUpperCase();
+		const isInputIngredients = e.target.classList.contains('input-ingredients');
+		const isInputAppliances = e.target.classList.contains('input-appliances');
+		const isInputUstensils = e.target.classList.contains('input-ustensils');
+
+		if (isInputIngredients) {
+			searchService.filterIngredients(searchValue);
+		}
+		if (isInputAppliances) {
+			searchService.filterAppliances(searchValue);
+		}
+		if (isInputUstensils) {
+			searchService.filterUstensils(searchValue);
+		}
+
+		// console.log(searchResult);
 	}
 }
