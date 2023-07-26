@@ -1,3 +1,5 @@
+import TagBuilder from '../builder/tagBuilder.js';
+
 export default class EventListener {
 	static listen(searchService) {
 		const dropdownsAndTags = document.querySelector('.dropdowns-and-tags');
@@ -10,6 +12,7 @@ export default class EventListener {
 			if (isCloseButton) {
 				this.removeSelectedTag(e, searchService);
 			}
+			// searchService.search();
 			console.log(searchService);
 		});
 
@@ -21,6 +24,7 @@ export default class EventListener {
 		this.inputListen(searchService);
 		this.inputSubmit(searchService);
 	}
+
 	static toggleMenu(e) {
 		const isAMenuTrigger = e.target.classList.contains('menu-trigger');
 
@@ -42,48 +46,34 @@ export default class EventListener {
 
 		e.target.classList.add('selected');
 
+		TagBuilder.buildTag(e);
+
 		const selectedTagsArea = document.querySelector('.selected-tags');
-		const selectedTag = document.createElement('div');
-		const elementStyles = window.getComputedStyle(e.target);
-		const backgroundColor = elementStyles.backgroundColor;
+		selectedTagsArea.classList.add('active');
+
 		const isIngredientTag = e.target.classList.contains(
 			'ingredients-list-item'
 		);
 		const isApplianceTag = e.target.classList.contains('appliances-list-item');
 		const isUstensilTag = e.target.classList.contains('ustensils-list-item');
-		const closeButton = document.createElement('div');
-
-		selectedTagsArea.classList.add('active');
-		selectedTag.classList.add('selected-tag');
-		closeButton.classList.add('remove-tag');
-
-		selectedTag.innerHTML = e.target.textContent;
-		selectedTag.appendChild(closeButton);
-		selectedTag.style.backgroundColor = backgroundColor;
-		selectedTagsArea.appendChild(selectedTag);
 
 		if (e.target.classList.contains('selected')) {
-			e.target.style.display = 'none';
-
 			if (
 				isIngredientTag &&
 				!searchService.searchParams.ingredientsSelected.includes(
 					e.target.textContent.toUpperCase()
 				)
 			) {
-				selectedTag.classList.add('ingredient-tag');
 				searchService.searchParams.ingredientsSelected.push(
 					e.target.textContent.toUpperCase()
 				);
 			}
 			if (isApplianceTag) {
-				selectedTag.classList.add('appliance-tag');
 				searchService.searchParams.appliancesSelected.push(
 					e.target.textContent.toUpperCase()
 				);
 			}
 			if (isUstensilTag) {
-				selectedTag.classList.add('ustensil-tag');
 				searchService.searchParams.ustensilsSelected.push(
 					e.target.textContent.toUpperCase()
 				);

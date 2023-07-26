@@ -7,19 +7,24 @@ export default class DropdownBuilder {
 		let ingredientsToDisplay = [];
 
 		if (
-			(searchParams.ingredientsSelected.length > 0 &&
-				searchResult.filteredIngredients.length > 0) ||
-			(searchResult.filteredIngredients.length > 0 &&
-				searchParams.ingredientsSelected.length > 0 == 0)
+			searchParams.ingredientsSelected.length > 0 &&
+			searchResult.filteredIngredients.length === 0
 		) {
-			const filteredIngredients = searchResult.filteredIngredients;
+			const selectedIngredients = searchParams.ingredientsSelected;
 
 			ingredientsToDisplay = [...searchResult.listIngredients]
-				.filter((ingredient) => filteredIngredients.includes(ingredient))
+				.filter((ingredient) => !selectedIngredients.includes(ingredient))
 				.sort();
-		} else if (searchParams.ingredientsSelected.length >= 0) {
+		} else if (
+			searchParams.ingredientsSelected.length === 0 &&
+			searchResult.filteredIngredients.length === 0
+		) {
+			ingredientsToDisplay = [...searchResult.listIngredients].sort();
+		} else if (searchResult.filteredIngredients.length > 0) {
 			const selectedIngredients = searchParams.ingredientsSelected;
+			const filteredIngredients = searchResult.filteredIngredients;
 			ingredientsToDisplay = [...searchResult.listIngredients]
+				.filter((ingredient) => filteredIngredients.includes(ingredient))
 				.filter((ingredient) => !selectedIngredients.includes(ingredient))
 				.sort();
 		}
@@ -35,10 +40,6 @@ export default class DropdownBuilder {
 		});
 	}
 
-	// static buildFilteredIngredientsDropdown(searchResult) {
-
-	// }
-
 	static buildAppliancesDropdown(searchResult, searchParams) {
 		const list = document.querySelector('.appliances-list');
 
@@ -47,19 +48,24 @@ export default class DropdownBuilder {
 		let appliancesToDisplay = [];
 
 		if (
-			(searchParams.appliancesSelected.length > 0 &&
-				searchResult.filteredAppliances.length > 0) ||
-			(searchResult.filteredAppliances.length > 0 &&
-				searchParams.appliancesSelected.length > 0 == 0)
+			searchParams.appliancesSelected.length > 0 &&
+			searchResult.filteredAppliances.length === 0
 		) {
-			const filteredAppliances = searchResult.filteredAppliances;
+			const selectedAppliances = searchParams.appliancesSelected;
 
 			appliancesToDisplay = [...searchResult.listAppliances]
-				.filter((appliance) => filteredAppliances.includes(appliance))
+				.filter((appliance) => !selectedAppliances.includes(appliance))
 				.sort();
-		} else if (searchParams.appliancesSelected.length >= 0) {
+		} else if (
+			searchParams.appliancesSelected.length === 0 &&
+			searchResult.filteredAppliances.length === 0
+		) {
+			appliancesToDisplay = [...searchResult.listAppliances].sort();
+		} else if (searchResult.filteredAppliances.length > 0) {
 			const selectedAppliances = searchParams.appliancesSelected;
+			const filteredAppliances = searchResult.filteredAppliances;
 			appliancesToDisplay = [...searchResult.listAppliances]
+				.filter((appliance) => filteredAppliances.includes(appliance))
 				.filter((appliance) => !selectedAppliances.includes(appliance))
 				.sort();
 		}
@@ -79,21 +85,25 @@ export default class DropdownBuilder {
 
 		list.innerHTML = '';
 		let ustensilsToDisplay = [];
-
 		if (
-			(searchParams.ustensilsSelected.length > 0 &&
-				searchResult.filteredUstensils.length > 0) ||
-			(searchResult.filteredUstensils.length > 0 &&
-				searchParams.ustensilsSelected.length > 0 == 0)
+			searchParams.ustensilsSelected.length > 0 &&
+			searchResult.filteredUstensils.length === 0
 		) {
-			const filteredUstensils = searchResult.filteredUstensils;
+			const selectedUstensils = searchParams.ustensilsSelected;
 
+			ustensilsToDisplay = [...searchResult.listUstensils]
+				.filter((ustensil) => !selectedUstensils.includes(ustensil))
+				.sort();
+		} else if (
+			searchParams.ustensilsSelected.length === 0 &&
+			searchResult.filteredUstensils.length === 0
+		) {
+			ustensilsToDisplay = [...searchResult.listUstensils].sort();
+		} else if (searchResult.filteredUstensils.length > 0) {
+			const selectedUstensils = searchParams.ustensilsSelected;
+			const filteredUstensils = searchResult.filteredUstensils;
 			ustensilsToDisplay = [...searchResult.listUstensils]
 				.filter((ustensil) => filteredUstensils.includes(ustensil))
-				.sort();
-		} else if (searchParams.ustensilsSelected.length >= 0) {
-			const selectedUstensils = searchParams.ustensilsSelected;
-			ustensilsToDisplay = [...searchResult.listUstensils]
 				.filter((ustensil) => !selectedUstensils.includes(ustensil))
 				.sort();
 		}

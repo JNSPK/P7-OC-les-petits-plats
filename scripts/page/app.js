@@ -11,9 +11,3 @@ searchService.search();
 // Ecoute du click pour les évènements
 
 EventListener.listen(searchService);
-
-// Ecoute du keydown pour les recherches au sein des dropdowns
-
-// KeyListener.listen(searchService);
-
-// console.log(searchResult);

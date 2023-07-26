@@ -48,12 +48,21 @@ export default class SearchService {
 		if (searchValue.trim() === '') {
 			this.searchResult.filteredIngredients = [
 				...this.searchResult.listIngredients,
-			].sort();
+			]
+				.filter(
+					(searchValue) =>
+						!this.searchParams.ingredientsSelected.includes(searchValue)
+				)
+				.sort();
 		} else {
 			this.searchResult.filteredIngredients = [
 				...this.searchResult.listIngredients,
 			]
 				.filter((ingredient) => ingredient.includes(searchValue.toUpperCase()))
+				.filter(
+					(searchValue) =>
+						!this.searchParams.ingredientsSelected.includes(searchValue)
+				)
 				.sort();
 		}
 		DropdownBuilder.buildIngredientsDropdown(
