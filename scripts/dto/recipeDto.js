@@ -37,36 +37,37 @@ export default class RecipeDto {
 		return isValid;
 	}
 	hasIngredient(ingredientsSelected) {
-		const upperCaseSelectedIngredients = ingredientsSelected.map((ingredient) =>
-			ingredient.toUpperCase()
-		);
-		const hasIngredient =
-			upperCaseSelectedIngredients.every((ingredient) =>
-				this.ingredients.has(ingredient)
-			) || ingredientsSelected.length === 0;
+		// const upperCaseSelectedIngredients = ingredientsSelected.map((ingredient) =>
+		// 	ingredient.toUpperCase()
+		// );
 
-		return hasIngredient;
+		return (
+			ingredientsSelected.every((ingredient) =>
+				this.ingredients.has(ingredient.toUpperCase())
+			) || ingredientsSelected.length === 0
+		);
 	}
 	hasUstensil(ustensilsSelected) {
-		const upperCaseSelectedUstensils = ustensilsSelected.map((ustensil) =>
-			ustensil.toUpperCase()
+		// const upperCaseSelectedUstensils = ustensilsSelected.map((ustensil) =>
+		// 	ustensil.toUpperCase()
+		// );
+
+		return (
+			ustensilsSelected.every((ustensil) =>
+				this.ustensils.has(ustensil.toUpperCase())
+			) || ustensilsSelected.length === 0
 		);
-		const hasUstensil =
-			upperCaseSelectedUstensils.every((ustensil) =>
-				this.ustensils.has(ustensil)
-			) || ustensilsSelected.length === 0;
-		return hasUstensil;
 	}
 
 	hasAppliance(appliancesSelected) {
-		const upperCaseSelectedAppliances = appliancesSelected.map((appliance) =>
-			appliance.toUpperCase()
+		// const upperCaseSelectedAppliances = appliancesSelected.map((appliance) =>
+		// 	appliance.toUpperCase()
+		// );
+		return (
+			appliancesSelected.every((appliance) =>
+				this.appliance.has(appliance.toUpperCase())
+			) || appliancesSelected.length === 0
 		);
-		const hasAppliance =
-			upperCaseSelectedAppliances.every((appliance) =>
-				this.appliance.has(appliance)
-			) || appliancesSelected.length === 0;
-		return hasAppliance;
 	}
 
 	// cleanValues() {

@@ -13,14 +13,9 @@ export default class EventListener {
 				this.removeSelectedTag(e, searchService);
 			}
 			// searchService.search();
-			console.log(searchService);
 		});
 
-		dropdownsAndTags.addEventListener('keyup', (e) => {
-			this.dropdownTagFilter(e, searchService);
-			console.log(searchService);
-		});
-
+		this.dropdownSearch(dropdownsAndTags);
 		this.inputListen(searchService);
 		this.inputSubmit(searchService);
 	}
@@ -84,18 +79,17 @@ export default class EventListener {
 	static removeSelectedTag(e, searchService) {
 		const selectedTagsArea = document.querySelector('.selected-tags');
 		selectedTagsArea.removeChild(e.target.parentNode);
-		var targetedIngredient =
+		const targetedIngredient =
 			searchService.searchParams.ingredientsSelected.indexOf(
 				e.target.parentNode
 			);
 
-		var targetedAppliance =
+		const targetedAppliance =
 			searchService.searchParams.appliancesSelected.indexOf(
 				e.target.parentNode
 			);
-		var targetedUstensil = searchService.searchParams.ustensilsSelected.indexOf(
-			e.target.parentNode
-		);
+		const targetedUstensil =
+			searchService.searchParams.ustensilsSelected.indexOf(e.target.parentNode);
 
 		const isIngredientTag =
 			e.target.parentNode.classList.contains('ingredient-tag');
@@ -124,49 +118,32 @@ export default class EventListener {
 
 	static inputListen(searchService) {
 		//on key up
-		const input = document.querySelector('.search');
-
-		input.addEventListener('keyup', (e) => {
-			if (e.target.value.length > 2) {
-				searchService.search(e);
-			}
-			if (document.querySelector('.search').value.length === 0) {
-				searchService.search(e);
-			}
+		document.querySelector('.search').addEventListener('keyup', () => {
+			searchService.search();
 		});
 	}
 	static inputSubmit(searchService) {
 		//on click sur loupe
-		const submit = document.querySelector('.submit');
-
-		submit.addEventListener('click', (e) => {
+		document.querySelector('.submit').addEventListener('click', (e) => {
 			e.preventDefault();
-
-			if (document.querySelector('.search').value.length > 2) {
-				searchService.search(e);
-			}
-			if (document.querySelector('.search').value.length === 0) {
-				searchService.search(e);
-			}
+			searchService.search();
 		});
 	}
 
-	static dropdownTagFilter(e, searchService) {
-		const searchValue = e.target.value.toUpperCase();
-		const isInputIngredients = e.target.classList.contains('input-ingredients');
-		const isInputAppliances = e.target.classList.contains('input-appliances');
-		const isInputUstensils = e.target.classList.contains('input-ustensils');
+	static dropdownSearch(dropdownsAndTags) {
+		dropdownsAndTags.addEventListener('keyup', (e) => {
+			const searchValue = e.target.value.toUpperCase();
+			const options = e.target.closest('ul').querySelectorAll('option');
 
-		if (isInputIngredients) {
-			searchService.filterIngredients(searchValue);
-		}
-		if (isInputAppliances) {
-			searchService.filterAppliances(searchValue);
-		}
-		if (isInputUstensils) {
-			searchService.filterUstensils(searchValue);
-		}
+			this.dropdownFiltered(searchValue, options);
+		});
+	}
 
-		// console.log(searchResult);
+	static dropdownFiltered(searchValue, options) {
+		options.forEach((item) => {
+			let hasSearchValue = item.value.toUpperCase().includes(searchValue);
+
+			item.style.display = hasSearchValue ? 'flex' : 'none';
+		});
 	}
 }

@@ -1,5 +1,5 @@
 export default class SearchResult {
-	constructor(recipesDto) {
+	constructor(recipesDto, searchParams) {
 		this.recipes = recipesDto;
 		this.listIngredients = new Set();
 		this.listUstensils = new Set();
@@ -7,27 +7,39 @@ export default class SearchResult {
 		this.filteredIngredients = [...this.listIngredients];
 		this.filteredAppliances = [...this.listAppliances];
 		this.filteredUstensils = [...this.listUstensils];
+		this.searchParams = searchParams;
 
 		recipesDto.forEach((recipeDto) => {
 			recipeDto.ingredients.forEach((ingredient) => {
 				const ingredientName = ingredient.toUpperCase();
-				if (!this.listIngredients.has(ingredientName)) {
+				if (
+					!this.searchParams.ingredientsSelected.some(
+						(ingredient) => ingredient === ingredientName
+					)
+				) {
 					this.listIngredients.add(ingredientName);
-				}
-			});
-
-			recipeDto.ustensils.forEach((ustensil) => {
-				const ustensilName = ustensil.toUpperCase();
-				//
-				if (!this.listUstensils.has(ustensilName)) {
-					this.listUstensils.add(ustensilName);
 				}
 			});
 
 			recipeDto.appliance.forEach((appliance) => {
 				const applianceName = appliance.toUpperCase();
-				if (!this.listAppliances.has(applianceName)) {
+				if (
+					!this.searchParams.appliancesSelected.some(
+						(appliance) => appliance === applianceName
+					)
+				) {
 					this.listAppliances.add(applianceName);
+				}
+			});
+			recipeDto.ustensils.forEach((ustensil) => {
+				const ustensilName = ustensil.toUpperCase();
+				//
+				if (
+					!this.searchParams.ustensilsSelected.some(
+						(ustensil) => ustensil === ustensilName
+					)
+				) {
+					this.listUstensils.add(ustensilName);
 				}
 			});
 		});
