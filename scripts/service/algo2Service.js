@@ -2,8 +2,14 @@ export default class Algo2Service {
 	static filterRecipes(searchParams, recipes) {
 		const recipesFiltered = new Set();
 
-		for (let recipesDto of recipes) {
-			// const recipesDto = recipes[recipeIndex];
+		const arrayRecipes = Array.from(recipes);
+
+		for (
+			let recipeIndex = 0;
+			recipeIndex < arrayRecipes.length;
+			recipeIndex++
+		) {
+			let recipesDto = arrayRecipes[recipeIndex];
 			const recipeDtoMatchSearchParams =
 				recipesDto.isValidInput(searchParams.inputValue.toUpperCase()) &&
 				recipesDto.hasIngredient(searchParams.ingredientsSelected) &&
@@ -16,6 +22,3 @@ export default class Algo2Service {
 		return recipesFiltered;
 	}
 }
-
-// (let recipeIndex = 0; recipeIndex < recipes.length; recipeIndex++)
-//

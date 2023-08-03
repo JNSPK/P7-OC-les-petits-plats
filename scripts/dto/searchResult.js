@@ -4,44 +4,47 @@ export default class SearchResult {
 		this.listIngredients = new Set();
 		this.listUstensils = new Set();
 		this.listAppliances = new Set();
-		this.filteredIngredients = [...this.listIngredients];
-		this.filteredAppliances = [...this.listAppliances];
-		this.filteredUstensils = [...this.listUstensils];
 		this.searchParams = searchParams;
 
 		recipesDto.forEach((recipeDto) => {
 			recipeDto.ingredients.forEach((ingredient) => {
-				const ingredientName = ingredient.toUpperCase();
+				const ingredientName = ingredient;
 				if (
 					!this.searchParams.ingredientsSelected.some(
-						(ingredient) => ingredient === ingredientName
+						(ingredient) => ingredient === ingredientName.toUpperCase()
 					)
 				) {
-					this.listIngredients.add(ingredientName);
+					addPluralFormToSet(this.listIngredients, ingredientName);
 				}
 			});
 
 			recipeDto.appliance.forEach((appliance) => {
-				const applianceName = appliance.toUpperCase();
+				const applianceName = appliance;
 				if (
 					!this.searchParams.appliancesSelected.some(
-						(appliance) => appliance === applianceName
+						(appliance) => appliance === applianceName.toUpperCase()
 					)
 				) {
-					this.listAppliances.add(applianceName);
+					addPluralFormToSet(this.listAppliances, applianceName);
 				}
 			});
 			recipeDto.ustensils.forEach((ustensil) => {
-				const ustensilName = ustensil.toUpperCase();
+				const ustensilName = ustensil;
 				//
 				if (
 					!this.searchParams.ustensilsSelected.some(
-						(ustensil) => ustensil === ustensilName
+						(ustensil) => ustensil === ustensilName.toUpperCase()
 					)
 				) {
-					this.listUstensils.add(ustensilName);
+					addPluralFormToSet(this.listUstensils, ustensilName);
 				}
 			});
 		});
+
+		function addPluralFormToSet(set, value) {
+			if (![...set].includes(value.substring(0, value.length - 1))) {
+				set.add(value.toUpperCase());
+			}
+		}
 	}
 }

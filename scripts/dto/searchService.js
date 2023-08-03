@@ -2,7 +2,8 @@ import SearchParams from './searchParams.js';
 import SearchResult from './searchResult.js';
 import RecipeCardBuilder from '../builder/recipeCardBuilder.js';
 import DropdownBuilder from '../builder/dropdownBuilder.js';
-import Algo2Service from '../service/algo2Service.js';
+import CountBuilder from '../builder/countBuilder.js';
+import Algo1Service from '../service/algo1Service.js';
 
 export default class SearchService {
 	constructor(recipes) {
@@ -15,11 +16,12 @@ export default class SearchService {
 		this.searchResult = new SearchResult(recipesFiltered, this.searchParams);
 		this.refreshRecipes();
 		this.refreshDropdowns();
+		this.refreshRecipesCount();
 		console.dir(this);
 	}
 
 	searchMatchingRecipes() {
-		return Algo2Service.filterRecipes(this.searchParams, this.recipes);
+		return Algo1Service.filterRecipes(this.searchParams, this.recipes);
 	}
 
 	refreshRecipes() {
@@ -42,5 +44,8 @@ export default class SearchService {
 			this.searchResult,
 			this.searchParams
 		);
+	}
+	refreshRecipesCount() {
+		CountBuilder.build(this.searchResult);
 	}
 }

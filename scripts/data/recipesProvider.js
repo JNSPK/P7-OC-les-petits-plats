@@ -7,14 +7,16 @@ export default class recipesProvider {
 
 		// Parcours des recettes et instance de RecipesDto pour chaque recette
 
-		// fetch('./recipes.js').then((res) => res.json()); ??????????????
-
 		recipes.forEach((recipe) => {
+			// On accède au tableau "ingredients" dans le tableau "recipes"
+
 			const ingredients = recipe.ingredients.map((ingredientData) => ({
 				ingredient: ingredientData.ingredient,
 				quantity: ingredientData.quantity,
 				unit: ingredientData.unit || '',
 			}));
+
+			// Instanciation du DTO pour chaque recette
 
 			const recipeData = new RecipeDto(
 				recipe.id,
@@ -27,6 +29,8 @@ export default class recipesProvider {
 				recipe.appliance,
 				recipe.ustensils
 			);
+
+			// Ajout au set "dataProvider"
 
 			dataProvider.add(recipeData);
 		});
