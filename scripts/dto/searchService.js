@@ -3,7 +3,7 @@ import SearchResult from './searchResult.js';
 import RecipeCardBuilder from '../builder/recipeCardBuilder.js';
 import DropdownBuilder from '../builder/dropdownBuilder.js';
 import CountBuilder from '../builder/countBuilder.js';
-import Algo1Service from '../service/algo1Service.js';
+import Algo2Service from '../service/algo2Service.js';
 
 export default class SearchService {
 	constructor(recipes) {
@@ -21,7 +21,7 @@ export default class SearchService {
 	}
 
 	searchMatchingRecipes() {
-		return Algo1Service.filterRecipes(this.searchParams, this.recipes);
+		return Algo2Service.filterRecipes(this.searchParams, this.recipes);
 	}
 
 	refreshRecipes() {
