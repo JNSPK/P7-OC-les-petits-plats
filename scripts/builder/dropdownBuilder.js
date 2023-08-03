@@ -1,14 +1,12 @@
 export default class DropdownBuilder {
+	// On récupère les ingredients à afficher dans les menus déroulants via le searchResult
+
 	static buildIngredientsDropdown(searchResult) {
 		const list = document.querySelector('.ingredients-list');
 
 		list.innerHTML = '';
 
 		let ingredientsToDisplay = [...searchResult.listIngredients].sort();
-
-		if (searchResult.filteredIngredients.length > 0) {
-			ingredientsToDisplay = [...searchResult.filteredIngredient].sort();
-		}
 
 		ingredientsToDisplay.forEach((ingredient) => {
 			const option = document.createElement('option');
@@ -28,10 +26,6 @@ export default class DropdownBuilder {
 
 		let appliancesToDisplay = [...searchResult.listAppliances].sort();
 
-		if (searchResult.filteredAppliances.length > 0) {
-			appliancesToDisplay = [...searchResult.filteredAppliances].sort();
-		}
-
 		appliancesToDisplay.forEach((appliance) => {
 			const option = document.createElement('option');
 			option.classList.add('appliances-list-item');
@@ -48,10 +42,6 @@ export default class DropdownBuilder {
 		list.innerHTML = '';
 
 		let ustensilsToDisplay = [...searchResult.listUstensils].sort();
-
-		if (searchResult.filteredUstensils.length > 0) {
-			ustensilsToDisplay = [...searchResult.filteredUstensils].sort();
-		}
 
 		ustensilsToDisplay.forEach((ustensil) => {
 			const option = document.createElement('option');

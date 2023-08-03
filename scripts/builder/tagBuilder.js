@@ -3,6 +3,8 @@ export default class TagBuilder {
 		const selectedTag = document.createElement('div');
 		const closeButton = document.createElement('div');
 
+		// On récupère le bakckground color de l'élément cliqué.
+
 		const elementStyles = window.getComputedStyle(e.target);
 		const backgroundColor = elementStyles.backgroundColor;
 
