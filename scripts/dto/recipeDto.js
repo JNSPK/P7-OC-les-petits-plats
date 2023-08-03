@@ -31,14 +31,13 @@ export default class RecipeDto {
 			this.ingredients.has(inputValue) ||
 			this.description.toUpperCase().includes(inputValue) ||
 			inputValue == '';
-		console.log(inputValue);
 
 		return isValid;
 	}
 	hasIngredient(ingredientsSelected) {
 		return (
-			ingredientsSelected.forEach((ingredient) =>
-				[...this.ingredients].includes(ingredient.toUpperCase())
+			ingredientsSelected.every((ingredient) =>
+				this.ingredients.has(ingredient.toUpperCase())
 			) || ingredientsSelected.length === 0
 		);
 	}
