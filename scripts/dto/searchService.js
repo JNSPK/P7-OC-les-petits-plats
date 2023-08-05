@@ -17,7 +17,6 @@ export default class SearchService {
 		this.refreshRecipes();
 		this.refreshDropdowns();
 		this.refreshRecipesCount();
-		console.dir(this);
 	}
 
 	searchMatchingRecipes() {

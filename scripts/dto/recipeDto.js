@@ -23,7 +23,7 @@ export default class RecipeDto {
 		this.description = description;
 		this.appliance = new Set([appliance.toUpperCase()]);
 		this.ustensils = new Set();
-		ustensils.forEach((ustensil) => addToSet(ustensil, this.ustensils)); // Retrait des doublons, majuscules, minuscules, pluriel, singulier
+		ustensils.forEach((ustensil) => addToSet(ustensil, this.ustensils));
 	}
 	isValidInput(inputValue) {
 		const isValid =

@@ -18,6 +18,7 @@ export default class DropdownBuilder {
 			list.appendChild(option);
 		});
 	}
+	// On récupère les appareils à afficher dans les menus déroulants via le searchResult
 
 	static buildAppliancesDropdown(searchResult) {
 		const list = document.querySelector('.appliances-list');
@@ -35,6 +36,8 @@ export default class DropdownBuilder {
 			list.appendChild(option);
 		});
 	}
+
+	// On récupère les ustensiles à afficher dans les menus déroulants via le searchResult
 
 	static buildUstensilsDropdown(searchResult) {
 		const list = document.querySelector('.ustensils-list');
